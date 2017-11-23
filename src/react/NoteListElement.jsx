@@ -12,7 +12,7 @@ class NoteListElement extends React.Component {
     };
  //   this.openNote = this.openNote.bind(this);    
     this.onEditBtnClick = this.onEditBtnClick.bind(this);       
-    this.onDeleteBtnClick = this.onEditDeleteClick.bind(this);       
+    this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);       
     this.onOpenBtnClick = this.onOpenBtnClick.bind(this);         
   }    
   onOpenBtnClick(e) { 

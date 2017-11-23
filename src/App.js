@@ -8,21 +8,14 @@ class App extends Component {
     super(props);
     this.state = {
     ////// store не видит, ???    
-      fullnotelist: this.props.store.fullnotelist,
-      selected: this.props.store.selected,
-      edited: this.props.store.edited
+      fullnotelist: this.props.store.getState().fullnotelist,
+      selected: this.props.store.getState().selected,
+      edited: this.props.store.getState().edited
     };
   }    
   render() {
+  console.log(this.props.store.getState());
   const selected = 1;
-/*
-this.props.store.dispatch(addNote("Заголовок 1", "Тело 1"));
-this.props.store.dispatch(addNote("Заголовок 2", "Тело 2"));
-this.props.store.dispatch(addNote("Заголовок 3", "Тело 3"));
-this.props.store.dispatch(viewNote(1));*/
-console.log("hi");      
-console.log(this.props.store.getState());
-  
   const fullnotelist = [
     {nhead: "Заголовок 1",
      nbody: "Тело 1"},
