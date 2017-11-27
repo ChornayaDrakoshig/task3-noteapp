@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
 //import * as pageActions from '../redux/actions';
-import {addNote, saveNote, deleteNote, viewNote, editNote} from '../redux/actions';
 
 class NoteListElement extends React.Component {
   constructor(props) {
@@ -13,25 +12,22 @@ class NoteListElement extends React.Component {
       notebody: this.props.nbody,
       active: this.props.act
     };
- //   this.openNote = this.openNote.bind(this);    
     this.onEditBtnClick = this.onEditBtnClick.bind(this);       
     this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);       
     this.onOpenBtnClick = this.onOpenBtnClick.bind(this);         
   }    
   onOpenBtnClick(e) { 
     console.log("try to open");  
-    viewNote(this.state.id);
+    this.props.viewNote(this.state.id);
   }
   onEditBtnClick(e) { 
     console.log("try to edit");  
-    editNote(this.state.id); ///// как правиьно подвязать эти экшены???? 
+    this.props.editNote(this.state.id); 
   }
   onDeleteBtnClick(e) { 
     console.log("try to delete");   
-    deleteNote(this.state.id);  
-    //pageActions.deleteNote(this.state.id);
-  }
-          
+    this.props.deleteNote(this.state.id);  
+  }    
   render() {
     return (
       <li id={"note"+this.state.id} className={this.state.active ? "list-group-item active" : "list-group-item"}>
@@ -45,10 +41,4 @@ class NoteListElement extends React.Component {
     )
   }
 }
-/*function mapDispatchToProps(dispatch) {
-  return {
-    pageActions: bindActionCreators(pageActions, dispatch)
-  }
-}
-export default connect(mapDispatchToProps)(NoteListElement); */
 export default NoteListElement;

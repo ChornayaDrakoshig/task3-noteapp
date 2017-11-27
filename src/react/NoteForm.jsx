@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+//import { connect } from 'react-redux'
+//import { bindActionCreators } from 'redux';
 import * as pageActions from '../redux/actions';
 
 class NoteForm extends React.Component {
@@ -32,7 +32,6 @@ class NoteForm extends React.Component {
       else pageActions.saveNote(this.state.noteheader,this.state.notebody,this.state.id);
   }    
   render() { 
-    console.log(this.state.id);  
     return (
     <form id="noteform">
       <div className="form-group">

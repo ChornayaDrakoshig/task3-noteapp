@@ -1,7 +1,7 @@
 import React from 'react';
 import NoteListElement from './NoteListElement';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
 import * as pageActions from '../redux/actions';
 
 class NotesList extends React.Component {
@@ -16,7 +16,7 @@ class NotesList extends React.Component {
     return (
       <ul id="noteslist" className="list-group">
         {this.state.notes.map((note, i) =>
-          <NoteListElement key={i} id={i} nhead={note.noteheader} nbody={note.notebody} act={(i === this.state.selected) ? true : false} />
+          <NoteListElement key={i} id={i} nhead={note.noteheader} nbody={note.notebody} act={(i === this.state.selected) ? true : false} viewNote={this.props.viewNote} deleteNote={this.props.deleteNote} editNote={this.props.editNote}/>
         )}
       </ul>    
     )   

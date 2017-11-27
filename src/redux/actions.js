@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 
 export const addNote = (head,body) => (dispatch) => ({
     type: 'ADD_NOTE',
@@ -13,7 +12,7 @@ export const saveNote = (head,body,i) => (dispatch) => ({
     id: i,
 });
 
-export const deleteNote = (i) => ({
+export const deleteNote = (i) => (dispatch) => ({
     type: 'DELETE_NOTE',
     id: i,
 });

@@ -3,8 +3,8 @@ import NoteForm from './react/NoteForm';
 import NotesList from './react/NotesList';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import {addNote, saveNote, deleteNote, viewNote, editNote} from './redux/actions';
-import * as pageActions from './redux/actions';
+import {addNote, saveNote, deleteNote, viewNote, editNote} from './redux/actions2';
+//import * as pageActions from './redux/actions2';
 
 class App extends Component {
   constructor(props) {
@@ -18,13 +18,14 @@ class App extends Component {
     };
   }    
   render() {
+    console.log(this.state.fullnotelist);  
     return (
       <div id="app"> 
         <div className="col-sm-5" id="notesformwrap">
           <NoteForm id={this.state.edited} nhead={this.state.editedhead} nbody={this.state.editedbody} stat={(this.state.edited>=0) ? true : false} />
         </div>
         <div className="col-sm-7" id="noteslistwrap">
-          <NotesList noteslist={this.state.fullnotelist} selected={this.state.selected}/>    
+          <NotesList noteslist={this.state.fullnotelist} selected={this.state.selected} viewNote={this.props.viewNote} deleteNote={this.props.deleteNote} editNote={this.props.editNote}/>    
         </div>
       </div>
     ); 
@@ -39,7 +40,9 @@ function mapStateToProps (state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    pageActions: bindActionCreators(pageActions, dispatch)
+    viewNote: bindActionCreators(viewNote, dispatch),
+    deleteNote: bindActionCreators(deleteNote, dispatch),  
+    editNote: bindActionCreators(deleteNote, dispatch)
   }
 }
 
