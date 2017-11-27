@@ -1,7 +1,5 @@
 import React from 'react';
 import NoteListElement from './NoteListElement';
-//import { connect } from 'react-redux';
-//import { bindActionCreators } from 'redux';
 import * as pageActions from '../redux/actions';
 
 class NotesList extends React.Component {
@@ -13,6 +11,7 @@ class NotesList extends React.Component {
     };
   }   
   render() {
+    console.log(this.state.notes);    
     return (
       <ul id="noteslist" className="list-group">
         {this.state.notes.map((note, i) =>
@@ -21,13 +20,5 @@ class NotesList extends React.Component {
       </ul>    
     )   
   }
-}/*
-function mapDispatchToProps(dispatch) {
-  return {
-    pageActions: bindActionCreators(pageActions, dispatch)
-  }
 }
-
-export default connect(mapDispatchToProps)(NotesList); 
-*/
 export default NotesList; 

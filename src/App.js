@@ -18,7 +18,6 @@ class App extends Component {
     };
   }    
   render() {
-    console.log(this.state.fullnotelist);  
     return (
       <div id="app"> 
         <div className="col-sm-5" id="notesformwrap">

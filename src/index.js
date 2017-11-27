@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
 import noteReducer from './redux/noteReducer';
-import getNotes from './getNotes';
+//import getNotes from './getNotes';
 
 //var note = getNotes((err, nstamp) => (nstamp));
 

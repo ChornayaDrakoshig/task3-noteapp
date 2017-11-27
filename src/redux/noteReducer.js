@@ -14,9 +14,7 @@ export function noteReducer(state, action) {
         console.log(action.id);  
         var newed = (state.edited === action.id) ? -1 : state.edited;  
         var newlist = state.fullnotelist;
-        console.log(newlist);  
         newlist.splice(action.id,1);   
-        console.log(newlist);  
         return ({fullnotelist: newlist, selected: 0, edited: newed});
       case 'VIEW_NOTE': 
         return ({fullnotelist: state.fullnotelist, selected: action.id, edited: state.edited});
