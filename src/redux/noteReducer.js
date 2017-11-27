@@ -21,4 +21,4 @@ export function noteReducer(state, action) {
       default: return state;      
   }
 }
-export default noteReducer
+export default noteReducer;

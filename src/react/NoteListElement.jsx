@@ -1,5 +1,8 @@
 import React from 'react';
-import * as pageActions from '../redux/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+//import * as pageActions from '../redux/actions';
+import {addNote, saveNote, deleteNote, viewNote, editNote} from '../redux/actions';
 
 class NoteListElement extends React.Component {
   constructor(props) {
@@ -16,13 +19,17 @@ class NoteListElement extends React.Component {
     this.onOpenBtnClick = this.onOpenBtnClick.bind(this);         
   }    
   onOpenBtnClick(e) { 
-    pageActions.viewNote(this.state.id);
+    console.log("try to open");  
+    viewNote(this.state.id);
   }
   onEditBtnClick(e) { 
-    pageActions.editNote(this.state.id);
+    console.log("try to edit");  
+    editNote(this.state.id); ///// как правиьно подвязать эти экшены???? 
   }
   onDeleteBtnClick(e) { 
-    pageActions.deleteNote(this.state.id);
+    console.log("try to delete");   
+    deleteNote(this.state.id);  
+    //pageActions.deleteNote(this.state.id);
   }
           
   render() {
@@ -38,5 +45,10 @@ class NoteListElement extends React.Component {
     )
   }
 }
-
+/*function mapDispatchToProps(dispatch) {
+  return {
+    pageActions: bindActionCreators(pageActions, dispatch)
+  }
+}
+export default connect(mapDispatchToProps)(NoteListElement); */
 export default NoteListElement;

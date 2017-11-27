@@ -7,17 +7,14 @@ import './index.css';
 import App from './App';
 import noteReducer from './redux/noteReducer';
 import {addNote, saveNote, deleteNote, viewNote, editNote} from './redux/actions';
-//import registerServiceWorker from './registerServiceWorker';
 
-var store = createStore(noteReducer);
-
-store.dispatch(addNote("Заголовок 1", "Тело 1"));
-store.dispatch(addNote("Заголовок 2", "Тело 2"));
-store.dispatch(addNote("Заголовок 3", "Тело 3"));
-store.dispatch(viewNote(1));
-store.dispatch(editNote(2));
-
-console.log(store.getState());
+var store = createStore(noteReducer,{
+  fullnotelist: [
+    {noteheader: "Заголовок 1", notebody:"Тело 1"},
+    {noteheader:"Заголовок 2", notebody:"Тело 2"},
+    {noteheader:"Заголовок 3", notebody:"Тело 3"}],
+  selected: 2,edited: 0,
+});
 
 ReactDOM.render(
   <Provider store={store}>
@@ -25,7 +22,3 @@ ReactDOM.render(
   </ Provider>,
   document.getElementById('root')
 )
-
-
-//ReactDOM.render(<App />, document.getElementById('root'));
-

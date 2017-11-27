@@ -22,14 +22,17 @@ class NoteForm extends React.Component {
     this.setState({nodeheader: event.target.value});
     console.log(this.state.noteheader);     
   }
+//// все равно не редактируется    
   handleChangeText(event) {
     this.setState({nodebody: event.target.value});
   }    
   onBtnClick(){
+    console.log("changing");  
     if (this.state.stat === true) pageActions.addNote(this.state.noteheader,this.state.notebody)  
       else pageActions.saveNote(this.state.noteheader,this.state.notebody,this.state.id);
   }    
   render() { 
+    console.log(this.state.id);  
     return (
     <form id="noteform">
       <div className="form-group">
@@ -43,26 +46,4 @@ class NoteForm extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  if (state.edited > -1) return {
-      id: state.fullnotelist[state.edited].id,
-      nhead: state.fullnotelist[state.edited].nhead,
-      nbody: state.fullnotelist[state.edited].nbody,
-      stat: false
-    }    
-  else return{
-    id: -1,
-    nhead: "",
-    nbody: "", 
-    stat: true  
-  }    
-}
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    pageActions: bindActionCreators(pageActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);
+export default NoteForm;

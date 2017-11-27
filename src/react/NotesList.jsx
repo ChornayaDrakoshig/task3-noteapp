@@ -8,37 +8,26 @@ class NotesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {    
-      fullnotelist: this.props.notes,
-      selected: this.props.selct
+      notes: this.props.noteslist,
+      selected: this.props.selected
     };
-    for (var i=0;i<this.state.fullnotelist.length;i++){
-        this.state.fullnotelist[i].id = i;
-        this.state.fullnotelist[i].act = i === this.state.selected ? true : false;
-    }
-  }    
+  }   
   render() {
-    let notelist=this.state.fullnotelist;  
-      const listItems = notelist.map((notelist) =>
-  <NoteListElement id={notelist.id} nhead={notelist.nhead} nbody={notelist.nbody} act={notelist.act} />
-    );    
     return (
       <ul id="noteslist" className="list-group">
-        {listItems}
+        {this.state.notes.map((note, i) =>
+          <NoteListElement key={i} id={i} nhead={note.noteheader} nbody={note.notebody} act={(i === this.state.selected) ? true : false} />
+        )}
       </ul>    
-
-    )
+    )   
   }
-}
-function mapStateToProps (state) {
-  return {
-    notes: state.fullnotelist,
-    selct: state.selected  
-  }
-}
+}/*
 function mapDispatchToProps(dispatch) {
   return {
     pageActions: bindActionCreators(pageActions, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotesList); 
+export default connect(mapDispatchToProps)(NotesList); 
+*/
+export default NotesList; 

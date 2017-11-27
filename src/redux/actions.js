@@ -1,42 +1,29 @@
-export function addNote(head,body)
-{
-  return {
+import { createStore } from 'redux';
+
+export const addNote = (head,body) => (dispatch) => ({
     type: 'ADD_NOTE',
     nhead: head,
     nbody: body,
-  };
-}
+});
 
-export function saveNote(head,body,i)
-{
-  return {
+export const saveNote = (head,body,i) => (dispatch) => ({
     type: 'SAVE_NOTE',
     nhead: head,
     nbody: body,
-    id: i  
-  }
-}
+    id: i,
+});
 
-export function deleteNote(i)
-{
-  return {
+export const deleteNote = (i) => ({
     type: 'DELETE_NOTE',
-    id: i  
-  }
-}
+    id: i,
+});
 
-export function viewNote(i)
-{
-  return {
+export const viewNote = (i) => (dispatch) => ({
     type: 'VIEW_NOTE',
-    id: i  
-  }
-}
+    id: i,
+});
 
-export function editNote(i)
-{
-  return {
+export const editNote = (i) => (dispatch) => ({
     type: 'EDIT_NOTE',
-    id: i  
-  }
-}
+    id: i,
+});
