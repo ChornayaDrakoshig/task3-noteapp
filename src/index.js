@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
-import noteReducer from './redux/noteReducer';
+import noteReducer from 'sourceRedux/noteReducer.js';
 
 var startStore = {};
 var str="";

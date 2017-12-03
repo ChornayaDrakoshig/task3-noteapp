@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NoteForm from './react/NoteForm';
-import NotesList from './react/NotesList';
+import NoteForm from 'sourceReact/NoteForm.jsx';
+import NotesList from 'sourceReact/NotesList.jsx';
 
 class App extends Component { 
   render() {
