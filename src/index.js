@@ -12,7 +12,7 @@ var str="";
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://localhost:8079/', false);
 xhr.send();
-if (xhr.status != 200) {
+if (xhr.status !== 200) {
   alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
 } else {
   str=xhr.responseText;
@@ -29,7 +29,6 @@ if (str!==""){
     selected: parseInt(req[1], 10),
     edited: parseInt(req[2], 10),  
   };
-console.log(startStore);
 }
 var store = createStore(noteReducer,startStore);
 ReactDOM.render(

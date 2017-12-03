@@ -20,8 +20,8 @@ export function noteReducer(state, action) {
         var newlist = state.fullnotelist;
         newlist.splice(action.id,1);   
         return ({fullnotelist: newlist, selected: newsel, edited: newed});
-      case 'VIEW_NOTE': 
-        return ({fullnotelist: state.fullnotelist, selected: action.id, edited: state.edited});
+      case 'VIEW_NOTE':     
+        return ({fullnotelist: state.fullnotelist, selected: ((action.id !== state.selected) ? action.id : -1), edited: state.edited});
       case 'EDIT_NOTE': 
         return ({fullnotelist: state.fullnotelist, selected: action.id, edited: action.id});
       default: return state;      
