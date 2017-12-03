@@ -10,8 +10,7 @@ class NoteListElement extends React.Component {
   onOpenBtnClick(e) { 
     this.props.viewNote(this.props.id);
   }
-  onEditBtnClick(e) { 
-    console.log("try to edit");  
+  onEditBtnClick(e) {  
     this.props.editNote(this.props.id); 
   }
   onDeleteBtnClick(e) { 

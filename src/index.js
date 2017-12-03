@@ -9,7 +9,6 @@ import noteReducer from './redux/noteReducer';
 
 var startStore = {};
 var str="";
-
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://localhost:8079/', false);
 xhr.send();
@@ -18,15 +17,6 @@ if (xhr.status != 200) {
 } else {
   str=xhr.responseText;
 }
-/*
-var request = require('request');
-request('http://localhost:8079/', function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log('body:', body); // Print the HTML for the Google homepage.
-  str=body;    
-      
-});*/
 if (str!==""){
   var req=str.split("&");
   var notes=req[0].split(",");
@@ -42,15 +32,9 @@ if (str!==""){
 console.log(startStore);
 }
 var store = createStore(noteReducer,startStore);
-
-
-
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App  />
   </ Provider>,
   document.getElementById('root')
 );
-console.log("kones");

@@ -7,15 +7,12 @@ var s = http.createServer(function(request, response) {
   response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   response.setHeader('Access-Control-Allow-Credentials', true);
   response.writeHead(200);
-  str="Заголовок 1,Тело 1";
+  str="Заметка 1,Тело 1";
   for (i=2;i<6;i++){
-    str+=",Заголовок "+i+",Тело "+i;
+    str+=",Заметка "+i+",Тело "+i;
   }     
   str+="&2&-1";      
   response.write(str);
   response.end();
 });
- 
 s.listen(8079);
- 
-console.log("Listening on http://127.0.0.1:8079/");
