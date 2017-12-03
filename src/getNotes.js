@@ -5,3 +5,4 @@ function getNotes(cb) {
   socket.emit('getNotes'); 
 }
 export default { getNotes }
+

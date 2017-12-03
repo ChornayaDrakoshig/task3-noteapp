@@ -1,48 +1,78 @@
 import React from 'react';
 //import { connect } from 'react-redux'
 //import { bindActionCreators } from 'redux';
-import * as pageActions from '../redux/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {addNote, saveNote} from '../redux/actions2';
+
 
 class NoteForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
-      noteheader: this.props.nhead,
-      notebody: this.props.nbody,
-      stat: this.props.stat 
+      note: {
+          noteheader: this.props.editedhead,
+          notebody: this.props.editedbody,
+      }    
     };
     this.handleChangeHeader = this.handleChangeHeader.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);  
     this.onBtnClick = this.onBtnClick.bind(this); 
   }
-    
+ 
+ componentWillReceiveProps(nextProps) {     
+   if (this.props.editedhead !== nextProps.editedhead) {
+     this.setState({
+      note: {
+          noteheader: nextProps.editedhead,
+          notebody: nextProps.editedbody,
+      }
+  });}
+ }    
  handleChangeHeader(event) {
-    console.log(event.target.value);
-    this.setState({nodeheader: event.target.value});
-    console.log(this.state.noteheader);     
-  }
-//// все равно не редактируется    
+    const editednote = this.state.note;
+    editednote.noteheader = event.target.value;
+    this.setState({ note: editednote }); 
+ }
   handleChangeText(event) {
-    this.setState({nodebody: event.target.value});
+    const editednote = this.state.note;
+    editednote.notebody = event.target.value;
+    this.setState({ note: editednote }); 
   }    
-  onBtnClick(){
-    console.log("changing");  
-    if (this.state.stat === true) pageActions.addNote(this.state.noteheader,this.state.notebody)  
-      else pageActions.saveNote(this.state.noteheader,this.state.notebody,this.state.id);
+  onBtnClick(event){
+    event.preventDefault();  
+    const head = this.state.note.noteheader;  
+    const body = this.state.note.notebody;
+    this.setState({note: {noteheader: "", notebody: "",}});  
+    if (this.props.edited < 0) this.props.addNote(head,body)  
+      else this.props.saveNote(head,body,this.props.edited);
   }    
-  render() { 
+  render() {      
     return (
     <form id="noteform">
       <div className="form-group">
-        <input type="text" className="form-control" id="notehead-form" value={this.state.noteheader} onChange={this.handleChangeHeader}  />
+        <input type="text" className="form-control" id="notehead-form" value={this.state.note.noteheader} onChange={this.handleChangeHeader}  />
       </div>
       <div className="form-group">
-        <textarea className="form-control" rows="5" id="notebody-form" value={this.state.notebody} onChange={this.handleChangeText} />
+        <textarea className="form-control" rows="5" id="notebody-form" value={this.state.note.notebody} onChange={this.handleChangeText} />
       </div>
-      <button type="submit" className="btn btn-default" onClick={this.onBtnClick}>{this.state.stat ? "Добавить" : "Сохранить"}</button>
+      <button className="btn btn-default" onClick={this.onBtnClick}>{(this.props.edited < 0) ? "Добавить" : "Сохранить"}</button>        
     </form>)  
   }
 }
 
-export default NoteForm;
+function mapStateToProps (state) {  
+  return {      
+    edited: state.edited,
+    editedhead: (state.edited >= 0) ? state.fullnotelist[state.edited].noteheader : "",
+    editedbody: (state.edited >= 0) ? state.fullnotelist[state.edited].notebody : "" ,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    saveNote: bindActionCreators(saveNote, dispatch),
+    addNote: bindActionCreators(addNote, dispatch)  
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteForm); 

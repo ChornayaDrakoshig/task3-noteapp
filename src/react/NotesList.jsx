@@ -1,24 +1,32 @@
 import React from 'react';
 import NoteListElement from './NoteListElement';
-import * as pageActions from '../redux/actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {deleteNote, viewNote, editNote} from '../redux/actions2';
 
 class NotesList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {    
-      notes: this.props.noteslist,
-      selected: this.props.selected
-    };
-  }   
-  render() {
-    console.log(this.state.notes);    
+  render() { 
     return (
       <ul id="noteslist" className="list-group">
-        {this.state.notes.map((note, i) =>
-          <NoteListElement key={i} id={i} nhead={note.noteheader} nbody={note.notebody} act={(i === this.state.selected) ? true : false} viewNote={this.props.viewNote} deleteNote={this.props.deleteNote} editNote={this.props.editNote}/>
-        )}
+        {this.props.fullnotelist.map((note, i) =>
+          <NoteListElement key={i} id={i} nhead={note.noteheader} nbody={note.notebody} act={(i === this.props.selected) ? true : false} viewNote={this.props.viewNote} deleteNote={this.props.deleteNote} editNote={this.props.editNote}/>
+        )}  
       </ul>    
     )   
   }
 }
-export default NotesList; 
+function mapStateToProps (state) {
+  return {
+    fullnotelist: state.fullnotelist,
+    selected: state.selected,
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    viewNote: bindActionCreators(viewNote, dispatch),
+    deleteNote: bindActionCreators(deleteNote, dispatch),  
+    editNote: bindActionCreators(editNote, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotesList); 

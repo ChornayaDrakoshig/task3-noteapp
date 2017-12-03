@@ -1,12 +1,23 @@
-const io = require('socket.io')();
+const port = 8001;
 
-io.on('connection', (client) => {
-  client.on('getNotes', () => {
-    console.log('client gets notes');
-    client.emit('notes',{fullnotelist: "fisrtnote", sel: 2})    
-  });
-});
+var server = require("net").createServer();
+var io = require("socket.io")(server);
 
-const port = 8000;
-io.listen(port);
+var handleClient = function (socket) {
+    var tweet = {user: "nodesource", text: "Hello, world!"};
+
+    // to make things interesting, have it send every second
+    var interval = setInterval(function () {
+        socket.emit("tweet", tweet);
+    }, 1000);
+
+    socket.on("disconnect", function () {
+        clearInterval(interval);
+    });
+};
+
+io.on("connection", handleClient);
+
+server.listen(port);
 console.log('listening on port ', port);
+

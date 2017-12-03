@@ -67,7 +67,7 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-throw new Error("Module parse failed: Unexpected token (20:2)\nYou may need an appropriate loader to handle this file type.\n| \n| ReactDOM.render(\n|   <Provider store={store}>\n|     <App  />\n|   </ Provider>,");
+throw new Error("Module parse failed: Unexpected token (39:2)\nYou may need an appropriate loader to handle this file type.\n| \n| ReactDOM.render(\n|   <Provider store={store}>\n|     <App  />\n|   </ Provider>,");
 
 /***/ })
 /******/ ]);
