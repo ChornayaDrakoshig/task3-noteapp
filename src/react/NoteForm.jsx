@@ -1,6 +1,4 @@
 import React from 'react';
-//import { connect } from 'react-redux'
-//import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {addNote, saveNote} from 'sourceRedux/actions2.js';
@@ -43,7 +41,7 @@ class NoteForm extends React.Component {
     event.preventDefault();  
     const head = this.state.note.noteheader;  
     const body = this.state.note.notebody;
-    this.setState({note: {noteheader: "", notebody: "",}});  
+    this.setState({note: {noteheader: '', notebody: '',}});
     if (this.props.edited < 0) this.props.addNote(head,body)  
       else this.props.saveNote(head,body,this.props.edited);
   }    
@@ -56,7 +54,7 @@ class NoteForm extends React.Component {
       <div className="form-group">
         <textarea className="form-control" rows="5" id="notebody-form" value={this.state.note.notebody} onChange={this.handleChangeText} />
       </div>
-      <button className="btn btn-default" onClick={this.onBtnClick}>{(this.props.edited < 0) ? "Добавить" : "Сохранить"}</button>        
+      <button className="btn btn-default" onClick={this.onBtnClick}>{(this.props.edited < 0) ? 'Добавить' : 'Сохранить'}</button>
     </form>)  
   }
 }
@@ -64,8 +62,8 @@ class NoteForm extends React.Component {
 function mapStateToProps (state) {  
   return {      
     edited: state.edited,
-    editedhead: (state.edited >= 0) ? state.fullnotelist[state.edited].noteheader : "",
-    editedbody: (state.edited >= 0) ? state.fullnotelist[state.edited].notebody : "" ,
+    editedhead: (state.edited >= 0) ? state.fullnotelist[state.edited].noteheader : '',
+    editedbody: (state.edited >= 0) ? state.fullnotelist[state.edited].notebody : '',
   }
 }
 function mapDispatchToProps(dispatch) {
