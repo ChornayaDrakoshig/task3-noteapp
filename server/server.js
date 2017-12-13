@@ -11,7 +11,7 @@ var s = http.createServer(function(request, response) {
   for (i=2;i<6;i++){
     str+=",Заметка "+i+",Тело "+i;
   }     
-  str+="&2&-1";      
+  str+="&2";      
   response.write(str);
   response.end();
 });

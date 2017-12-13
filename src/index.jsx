@@ -6,34 +6,33 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from 'sourceDir/App.jsx';
 import noteReducer from 'sourceRedux/noteReducer.js';
+import { addNote, viewNote, editNote } from 'sourceRedux/actions2.js';
 
-let startStore = {};
+const store = createStore(noteReducer);
+
 let str = '';
 const xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://localhost:8079/', false);
+xhr.open('GET', 'http://localhost:8079/', true);
 xhr.send();
-if (xhr.status !== 200) {
-  alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
-} else {
-  str = xhr.responseText;
-}
-if (str !== '') {
-  const req = str.split('&');
-  const notes = req[0].split(',');
-  let notelist = [];
-  for (let i = 0; i < notes.length / 2; i++) {
-    notelist.push({ noteheader: notes[2 * i], notebody: notes[(2 * i) + 1] });
+xhr.onreadystatechange = function () {
+  if (xhr.readyState !== 4) return;
+  if (xhr.status === 200) {
+    str = xhr.responseText;
+    if (str !== '') {
+      const req = str.split('&');
+      const notes = req[0].split(',');
+      for (let i = 0; i < notes.length / 2; i++) {
+        store.dispatch(addNote(notes[2 * i], notes[(2 * i) + 1]));
+      }    
+      store.dispatch(viewNote(parseInt(req[1], 10)));
+    }
   }
-  startStore = {
-    fullnotelist: notelist,
-    selected: parseInt(req[1], 10),
-    edited: parseInt(req[2], 10),
-  };
-}
-const store = createStore(noteReducer, startStore);
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root'),
 );
+

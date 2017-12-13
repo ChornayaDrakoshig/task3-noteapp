@@ -20,13 +20,13 @@ class NoteListElement extends React.Component {
     return (
       <li id={'note'+this.props.id} className={this.props.act ? 'list-group-item active' : 'list-group-item'}>
         <span onClick={this.onOpenBtnClick} >{this.props.nhead}</span>
-        <div className="button-block">
-          <button type="button" className="btn btn-default btn-xs" onClick={this.onEditBtnClick}>Редактировать</button>
-          <button type="button" className="btn btn-default btn-xs" onClick={this.onDeleteBtnClick}>Удалить</button>
+        <div className='button-block'>
+          <button type='button' className='btn btn-default btn-xs' onClick={this.onEditBtnClick}>Редактировать</button>
+          <button type='button' className='btn btn-default btn-xs' onClick={this.onDeleteBtnClick}>Удалить</button>
         </div>
         {this.props.act && <div className='panel panel-default'><div className='panel-body' >{this.props.nbody}</div></div>}
       </li>
-    )
+    );
   }
 }
 export default NoteListElement;

@@ -11,12 +11,12 @@ export function noteReducer(state, action) {
       return ({ fullnotelist: newlist, selected: newlist.length - 1, edited: -1 });
     case 'SAVE_NOTE':
       newlist = state.fullnotelist;
-      newlist[action.id] = { noteheader: action.nhead, notebody: action.nbody};
+      newlist[action.id] = { noteheader: action.nhead, notebody: action.nbody };
       return ({ fullnotelist: newlist, selected: action.id, edited: -1 });
     case 'DELETE_NOTE':
-      if (state.selected < action.id) newsel = state.selected
+      if (state.selected < action.id) newsel = state.selected;
       else if (state.selected > action.id) newsel = state.selected - 1;
-      if (state.edited < action.id) newed = state.edited
+      if (state.edited < action.id) newed = state.edited;
       else if (state.edited > action.id) newed = state.edited - 1;
       newlist = state.fullnotelist;
       newlist.splice(action.id, 1);

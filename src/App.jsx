@@ -5,11 +5,11 @@ import NotesList from 'sourceReact/NotesList.jsx';
 class App extends Component {
   render() {
     return (
-      <div id="app">
-        <div className="col-sm-5" id="notesformwrap">
+      <div id='app'>
+        <div className='col-sm-5' id='notesformwrap'>
           <NoteForm />
         </div>
-        <div className="col-sm-7" id="noteslistwrap">
+        <div className='col-sm-7' id='noteslistwrap'>
           <NotesList />
         </div>
       </div>
