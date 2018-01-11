@@ -1,6 +1,7 @@
 export function noteReducer(state, action) {
+  let newState;
   if (state === undefined) {
-    state = { fullnotelist: [], selected: -1, edited: -1 };
+    newState = { fullnotelist: [], selected: -1, edited: -1 };
   }
   let newlist = [];
   let newsel = -1;
@@ -22,10 +23,14 @@ export function noteReducer(state, action) {
       newlist.splice(action.id, 1);
       return ({ fullnotelist: newlist, selected: newsel, edited: newed });
     case 'VIEW_NOTE':
-      return ({ fullnotelist: state.fullnotelist, selected: ((action.id !== state.selected) ? action.id : -1), edited: state.edited });
+      return ({
+        fullnotelist: state.fullnotelist,
+        selected: ((action.id !== state.selected) ? action.id : -1),
+        edited: state.edited,
+      });
     case 'EDIT_NOTE':
       return ({ fullnotelist: state.fullnotelist, selected: action.id, edited: action.id });
-    default: return state;
+    default: return newState;
   }
 }
 export default noteReducer;

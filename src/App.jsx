@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import NoteForm from 'sourceReact/NoteForm.jsx';
-import NotesList from 'sourceReact/NotesList.jsx';
+import Header from 'sourceDir/Header.jsx';
+import Main from 'sourceDir/Main.jsx';
 
 class App extends Component {
   render() {
     return (
       <div id='app'>
-        <div className='col-sm-5' id='notesformwrap'>
-          <NoteForm />
-        </div>
-        <div className='col-sm-7' id='noteslistwrap'>
-          <NotesList />
-        </div>
+        <Header />
+        <Main />    
       </div>
     );
   }

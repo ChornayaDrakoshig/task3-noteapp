@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {addNote, saveNote} from 'sourceRedux/actions2.js';
+import { addNote, saveNote } from 'sourceRedux/actions2.js';
 
 
 class NoteForm extends React.Component {
@@ -33,8 +33,8 @@ class NoteForm extends React.Component {
     const head = this.state.note.noteheader;
     const body = this.state.note.notebody;
     this.setState({ note: { noteheader: '', notebody: '' } });
-    if (this.props.edited < 0) this.props.addNote(head,body)  
-    else this.props.saveNote(head,body,this.props.edited);
+    if (this.props.edited < 0) this.props.addNote(head, body);
+    else this.props.saveNote(head, body, this.props.edited);
   }
   handleChangeHeader(event) {
     const editednote = this.state.note;
@@ -59,6 +59,7 @@ class NoteForm extends React.Component {
       </form>);
   }
 }
+
 
 function mapStateToProps(state) {
   return {
