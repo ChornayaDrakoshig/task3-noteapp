@@ -1,6 +1,6 @@
 export const login = (userInfo) => ({
   type: 'USER_LOGIN',
-  username: userinfo.username,
+  username: userInfo.username,
   email: userInfo.email,
 });
 
