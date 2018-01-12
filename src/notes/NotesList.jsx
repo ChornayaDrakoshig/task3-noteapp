@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NoteListElement from './NoteListElement.jsx';
-import { deleteNote, viewNote, editNote } from 'sourceRedux/actions2.js';
+import { deleteNote, viewNote, editNote } from 'sourceRedux/noteActions.js';
 
 class NotesList extends React.Component {
   render() {

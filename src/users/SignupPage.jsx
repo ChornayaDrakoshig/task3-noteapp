@@ -27,7 +27,7 @@ constructor(props) {
     }
   }*/
   onBtnClick(event) {
-    event.preventDefault();
+    event.preventDefault(); 
     /*const head = this.state.note.noteheader;
     const body = this.state.note.notebody;
     this.setState({ note: { noteheader: '', notebody: '' } });
@@ -52,7 +52,7 @@ constructor(props) {
         <div className='panel panel-default userforms'>
           <div className='panel-heading'>Регистрация</div>
           <div className='panel-body'>
-            <form id='noteform'>
+            <form id='signupform'>
               <div className='form-group'>
                 <label for="login">Логин:</label>
                 <input type='text' className='form-control' id='login' value={this.state.login} onChange={this.handleChangeLogin} />

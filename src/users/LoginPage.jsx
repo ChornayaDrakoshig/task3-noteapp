@@ -23,52 +23,58 @@ constructor(props) {
     }
   }*/
   onBtnClick(event) {
-    event.preventDefault();
-let str = '';
-const xhr = new XMLHttpRequest();
-let login = 'Cmok';
-let pass = 'zzzzzz';
-let params = '?login=' + encodeURIComponent(login) +
-  '&password=' + encodeURIComponent(pass);
-
-xhr.open('GET', 'http://localhost:8079/'+params, true);
-xhr.send();
-xhr.onreadystatechange = function () {
-  if (xhr.readyState !== 4) return;
-  if (xhr.status === 200) {
-    str = xhr.responseText;
-    if (str !== '') {
-      console.log("server answered");
-    }
-  }
-};
-      
-    /*const head = this.state.note.noteheader;
-    const body = this.state.note.notebody;
-    this.setState({ note: { noteheader: '', notebody: '' } });
-    if (this.props.edited < 0) this.props.addNote(head, body);
-    else this.props.saveNote(head, body, this.props.edited);*/
+    event.preventDefault(); /// это что воообще?
+    //// написать что-то дл валидации формы; или в каждом поле свое?
+    //// почитать про валидацию форм вообще  
+    const xhr = new XMLHttpRequest();
+    let str = '';
+    const json = JSON.stringify({
+      form: 'loginform',
+      login: this.state.login,
+      password: this.state.password,
+    });
+    xhr.open('POST', 'http://localhost:8079/', true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.send(json);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState !== 4) return;
+      if (xhr.status === 200) {
+        str = xhr.responseText;
+        if (str !== '') {
+          const answer = JSON.parse(str);
+          if (answer.prom === 0) {
+            console.log('done!');
+            console.log(answer.username + ' ' + answer.email);
+          } else if (answer.prom === 1) {
+            console.log('no such user in system');
+          } else if (answer.prom === 2) {
+            console.log('wrong password');
+          }
+        }
+      }
+    };
+  ///// подумать, как исп редусеры; возможно нужен тот, который изменяет стили форм? и отображает сообщения сервера      
   }
   handleChangeLogin(event) {
     this.setState({ login: event.target.value });
   }
   handleChangePassword(event) {
     this.setState({ password: event.target.value });
-  }    
-    
+  }
+
   render() {
     return (
       <div className='panel-group'>
         <div className='panel panel-default userforms'>
           <div className='panel-heading'>Вход</div>
           <div className='panel-body'>
-            <form id='noteform'>
+            <form id='loginform' name='loginform'>
               <div className='form-group'>
-                <label for="login">Логин:</label>
+                <label htmlFor='login'>Логин:</label>
                 <input type='text' className='form-control' id='login' value={this.state.login} onChange={this.handleChangeLogin} />
               </div>
               <div className='form-group'>
-                <label for="pass">Пароль:</label>
+                <label htmlFor='pass'>Пароль:</label>
                 <input type='password' className='form-control' id='pass' value={this.state.password} onChange={this.handleChangePassword} />
               </div>
               <button className='btn btn-default' onClick={this.onBtnClick}>Войти</button>

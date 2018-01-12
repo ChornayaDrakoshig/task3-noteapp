@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addNote, saveNote } from 'sourceRedux/actions2.js';
+import { addNote, saveNote } from 'sourceRedux/noteActions.js';
 
 
 class NoteForm extends React.Component {
