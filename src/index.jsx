@@ -6,10 +6,11 @@ import { HashRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from 'sourceDir/App.jsx';
-import noteReducer from 'sourceRedux/noteReducer.js';
+//import noteReducer from 'sourceRedux/noteReducer.js';
+import reducer from 'sourceRedux/rootReducer.js'
 import { addNote } from 'sourceRedux/noteActions.js';
 
-const store = createStore(noteReducer);
+const store = createStore(reducer);
 
 let str = '';
 const xhr = new XMLHttpRequest();

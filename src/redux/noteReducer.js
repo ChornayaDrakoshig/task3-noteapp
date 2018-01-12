@@ -1,8 +1,11 @@
-export function noteReducer(state, action) {
-  let newState;
-  if (state === undefined) {
-    newState = { fullnotelist: [], selected: -1, edited: -1 };
-  }
+const initialState = {
+  fullnotelist: [],
+  selected: -1,
+  edited: -1,
+};
+
+export function notes(state = initialState, action) {
+  let newState = { fullnotelist: [], selected: -1, edited: -1 };
   let newlist = [];
   let newsel = -1;
   let newed = -1;
@@ -33,4 +36,4 @@ export function noteReducer(state, action) {
     default: return newState;
   }
 }
-export default noteReducer;
+export default notes;

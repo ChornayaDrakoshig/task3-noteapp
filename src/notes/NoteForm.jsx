@@ -63,9 +63,9 @@ class NoteForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    edited: state.edited,
-    editedhead: (state.edited >= 0) ? state.fullnotelist[state.edited].noteheader : '',
-    editedbody: (state.edited >= 0) ? state.fullnotelist[state.edited].notebody : '',
+    edited: state.notes.edited,
+    editedhead: (state.notes.edited >= 0) ? state.notes.fullnotelist[state.notes.edited].noteheader : '',
+    editedbody: (state.notes.edited >= 0) ? state.notes.fullnotelist[state.notes.edited].notebody : '',
   };
 }
 function mapDispatchToProps(dispatch) {

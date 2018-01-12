@@ -1,0 +1,10 @@
+const initialState = {};
+
+export function user(state = initialState, action) {
+  switch (action.type) {
+    case 'USER_LOGIN': return { username: action.username, email: action.email };
+    case 'USER_LOGOUT': return {};
+    default: return state;
+  }
+}
+export default user;

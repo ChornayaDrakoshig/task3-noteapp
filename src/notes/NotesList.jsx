@@ -21,8 +21,8 @@ class NotesList extends React.Component {
 }
 function mapStateToProps(state) {
   return {
-    fullnotelist: state.fullnotelist,
-    selected: state.selected,
+    fullnotelist: state.notes.fullnotelist,
+    selected: state.notes.selected,
   };
 }
 function mapDispatchToProps(dispatch) {
