@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoginForm from './LoginForm.jsx';
 import UserInfo from './UserInfo.jsx';
-import { successAlert, errorAlert, clearAlert } from 'sourceRedux/alertActions.js';
-import { login, logout } from 'sourceRedux/userActions.js';
 
 class LoginPage extends Component {    
   render() {
-    //// исправить: если успешно, форма не рендерится, есть кнопка выйти  
     return (
       <div>
         {('type' in this.props.alert) && <div className={`alert ${this.props.alert.type}`}>{this.props.alert.msg}</div>}
