@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import App from 'sourceDir/App.jsx';
+import App from 'sourceDir/components/common/App.jsx';
 import reducer from 'sourceRedux/rootReducer.js'
-import { addNote } from 'sourceRedux/noteActions.js';
+import { addNote } from 'sourceRedux/modules/note/noteActions.js';
 
 const store = createStore(reducer);
 

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { errorAlert, clearAlert } from 'sourceRedux/alertActions.js';
-import { loginUser } from 'sourceRedux/userActions.js';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -17,6 +13,7 @@ class SignupForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
   }
 
   onBtnClick(event) {
@@ -30,6 +27,7 @@ class SignupForm extends Component {
       const fnLogin = this.props.loginUser;
       const fnError = this.props.errorAlert;
       const fnClear = this.props.clearAlert;
+      const fnSuccess = this.props.successAlert;
       const json = JSON.stringify({
         form: 'signupform',
         login: this.state.login,
@@ -47,9 +45,9 @@ class SignupForm extends Component {
             answer = JSON.parse(str);
             if (answer.prom === 0) {
               fnLogin(answer);
-              fnClear('signup');
+              fnSuccess('Вы вошли в систему');
             } else if (answer.prom === 1) {
-              fnError('Пользователь с таким именем уже зарегистрирован', 'signup');
+              fnError('Пользователь с таким именем уже зарегистрирован');
             }
           }
         }
@@ -60,10 +58,29 @@ class SignupForm extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.clearAlert();
+    this.props.logoutUser();
+  }
+  
   render() {
     const {
       login, password, passrepeated, email, submitted,
     } = this.state;
+      if (this.props.isLoggedIn) {
+      return (
+        <div>
+          {('type' in this.props.alert) && <div className={`alert ${this.props.alert.type}`}>{this.props.alert.msg}</div>}
+        <ul>
+          <li><b>Login:</b> {this.props.userInfo.username}</li>
+          <li><b>Email:</b> {this.props.userInfo.email}</li>
+        </ul>
+        <button className='btn btn-default' onClick={this.onLogoutClick}>Выйти</button>
+        </div>
+      );
+    } 
+  else {
     return (
       <form id='signupform'>
         <div className={'form-group' + (submitted && !login ? ' has-error' : '')}>
@@ -92,20 +109,11 @@ class SignupForm extends Component {
     );
   }
 }
+}
 SignupForm.propTypes = {
   loginUser: PropTypes.func,
   errorAlert: PropTypes.func,
   clearAlert: PropTypes.func,
 };
-function mapStateToProps(state) {
-  return {};
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    loginUser: bindActionCreators(loginUser, dispatch),
-    errorAlert: bindActionCreators(errorAlert, dispatch),
-    clearAlert: bindActionCreators(clearAlert, dispatch),
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+export default SignupForm;

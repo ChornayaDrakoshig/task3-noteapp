@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NoteForm from 'sourceReactNotes/NoteForm.jsx';
-import NotesList from 'sourceReactNotes/NotesList.jsx';
+import NoteForm from 'sourceDir/components/containers/NoteForm/NoteFormConnector.jsx';
+import NotesList from 'sourceDir/components/containers/NotesList/NotesListConnector.jsx';
 
 class NotesPage extends Component {
   render() {

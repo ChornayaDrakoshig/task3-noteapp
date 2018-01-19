@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import NotesPage from 'sourceReactNotes/NotesPage.jsx';
-import LoginPage from 'sourceReactUsers/LoginPage.jsx';
-import SignupPage from 'sourceReactUsers/SignupPage.jsx';
+import NotesPage from 'sourceDir/components/pages/NotesPage.jsx';
+import LoginPage from 'sourceDir/components/pages/LoginPage.jsx';
+import SignupPage from 'sourceDir/components/pages/SignupPage.jsx';
 
 class Main extends Component {
   render() {

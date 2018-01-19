@@ -1,7 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { deleteNote, viewNote, editNote } from 'sourceRedux/noteActions.js';
 import NoteListElement from './NoteListElement.jsx';
 
 class NotesList extends React.Component {
@@ -19,18 +16,5 @@ class NotesList extends React.Component {
     return (<ul id='noteslist' className='list-group' />);
   }
 }
-function mapStateToProps(state) {
-  return {
-    fullnotelist: state.notes.fullnotelist,
-    selected: state.notes.selected,
-  };
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    viewNote: bindActionCreators(viewNote, dispatch),
-    deleteNote: bindActionCreators(deleteNote, dispatch),
-    editNote: bindActionCreators(editNote, dispatch),
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotesList);
+export default NotesList;

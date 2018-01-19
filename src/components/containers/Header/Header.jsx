@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 class Header extends Component {
   render() {
@@ -32,11 +30,4 @@ class Header extends Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    isLoggedIn: ('username' in state.user),
-    username: ('username' in state.user) ? state.user.username : 'Anonymous',
-    email: ('email' in state.user) ? state.user.email : '',
-  };
-}
-export default connect(mapStateToProps)(Header);
+export default Header;

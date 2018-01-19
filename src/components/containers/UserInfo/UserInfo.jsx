@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { clearAlert } from 'sourceRedux/alertActions.js';
-import { logoutUser } from 'sourceRedux/userActions.js';
+import { clearAlert } from 'sourceRedux/modules/alert/alertActions.js';
+import { logoutUser } from 'sourceRedux/modules/user/userActions.js';
 
 class UserInfo extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class UserInfo extends Component {
     this.props.logout();
   }
   render() {
+  ////  {('type' in this.props.alert) && <div className={`alert ${this.props.alert.type}`}>{this.props.alert.msg}</div>}  
     return (
       <div>
         Вы уже вошли как пользователь:
