@@ -1,13 +1,15 @@
+import { alertConstants } from './alertConstants.js';
+
 export const successAlert = (message) => ({
-  type: 'ALERT_SUCCESS',
+  type: alertConstants.SUCCESS,
   msg: message,
 });
 
 export const errorAlert = (message) => ({
-  type: 'ALERT_ERROR',
+  type: alertConstants.ERROR,
   msg: message,
 });
 
 export const clearAlert = () => ({
-  type: 'ALERT_CLEAR',
+  type: alertConstants.CLEAR,
 });

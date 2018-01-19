@@ -1,9 +1,11 @@
+import { userConstants } from './userConstants.js';
+
 export const loginUser = (userInfo) => ({
-  type: 'USER_LOGIN',
+  type: userConstants.LOGIN,
   username: userInfo.username,
   email: userInfo.email,
 });
 
 export const logoutUser = () => ({
-  type: 'USER_LOGOUT',
+  type: userConstants.LOGOUT,
 });

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { notes } from './noteReducer';
-import { alert } from './alertReducer';
-import { user } from './userReducer';
+import { notes } from './modules/note/noteReducer';
+import { alert } from './modules/alert/alertReducer';
+import { user } from './modules/user/userReducer';
 
 export default combineReducers({
   notes,

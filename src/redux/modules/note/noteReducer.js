@@ -1,3 +1,5 @@
+import { noteConstants } from './noteConstants.js';
+
 const initialState = {
   fullnotelist: [],
   selected: -1,
@@ -10,14 +12,14 @@ export function notes(state = initialState, action) {
   let newsel = -1;
   let newed = -1;
   switch (action.type) {
-    case 'ADD_NOTE':
+    case noteConstants.ADD:
       newlist = state.fullnotelist.concat([{ noteheader: action.nhead, notebody: action.nbody }]);
       return ({ fullnotelist: newlist, selected: newlist.length - 1, edited: -1 });
-    case 'SAVE_NOTE':
+    case noteConstants.SAVE:
       newlist = state.fullnotelist;
       newlist[action.id] = { noteheader: action.nhead, notebody: action.nbody };
       return ({ fullnotelist: newlist, selected: action.id, edited: -1 });
-    case 'DELETE_NOTE':
+    case noteConstants.DELETE:
       if (state.selected < action.id) newsel = state.selected;
       else if (state.selected > action.id) newsel = state.selected - 1;
       if (state.edited < action.id) newed = state.edited;
@@ -25,13 +27,13 @@ export function notes(state = initialState, action) {
       newlist = state.fullnotelist;
       newlist.splice(action.id, 1);
       return ({ fullnotelist: newlist, selected: newsel, edited: newed });
-    case 'VIEW_NOTE':
+    case noteConstants.VIEW:
       return ({
         fullnotelist: state.fullnotelist,
         selected: ((action.id !== state.selected) ? action.id : -1),
         edited: state.edited,
       });
-    case 'EDIT_NOTE':
+    case noteConstants.EDIT:
       return ({ fullnotelist: state.fullnotelist, selected: action.id, edited: action.id });
     default: return newState;
   }
