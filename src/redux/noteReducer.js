@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export function notes(state = initialState, action) {
-  let newState = { fullnotelist: [], selected: -1, edited: -1 };
+  const newState = { fullnotelist: [], selected: -1, edited: -1 };
   let newlist = [];
   let newsel = -1;
   let newed = -1;

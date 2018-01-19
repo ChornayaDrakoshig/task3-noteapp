@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import LoginForm from './LoginForm.jsx';
 import UserInfo from './UserInfo.jsx';
 
-class LoginPage extends Component {    
+class LoginPage extends Component {
+  
   render() {
     return (
       <div>
@@ -18,7 +19,7 @@ class LoginPage extends Component {
             </div>
           </div>
         </div>
-      </div>            
+      </div>
     );
   }
 }

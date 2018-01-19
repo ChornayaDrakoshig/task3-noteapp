@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import SignupForm from './SignupForm.jsx';
 import UserInfo from './UserInfo.jsx';
 
-class SignupPage extends Component {    
+class SignupPage extends Component {
   render() {
     return (
       <div>
@@ -18,10 +18,14 @@ class SignupPage extends Component {
             </div>
           </div>
         </div>
-      </div>            
+      </div>
     );
   }
 }
+SignupPage.propTypes = {
+  alert: PropTypes.object,
+  isLoggedIn: PropTypes.bool,
+};
 function mapStateToProps(state) {
   return {
     alert: ('type' in state.alert) ? { type: state.alert.type, msg: state.alert.message } : {},

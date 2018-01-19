@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { errorAlert, clearAlert } from 'sourceRedux/alertActions.js';
-import { login } from 'sourceRedux/userActions.js';
+import { loginUser } from 'sourceRedux/userActions.js';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -10,16 +10,12 @@ class LoginForm extends Component {
     this.state = {
       login: '',
       password: '',
-      submitted: false,    
+      submitted: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
   }
 
-  handleChange(e) {  
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }    
   onBtnClick(event) {
     event.preventDefault();
     this.setState({ submitted: true });
@@ -27,7 +23,7 @@ class LoginForm extends Component {
       const xhr = new XMLHttpRequest();
       let str = '';
       let answer = {};
-      const fnLogin = this.props.login;
+      const fnLogin = this.props.loginUser;
       const fnError = this.props.errorAlert;
       const fnClear = this.props.clearAlert;
       const json = JSON.stringify({
@@ -57,20 +53,24 @@ class LoginForm extends Component {
       };
     }
   }
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
 
   render() {
-    const { login, password, submitted } = this.state;  
+    const { login, password, submitted } = this.state;
     return (
       <form id='loginform' name='loginform'>
         <div className={'form-group' + (submitted && !login ? ' has-error' : '')}>
           <label htmlFor='login'>Логин:</label>
           <input type='text' className='form-control' id='login' name='login' value={this.state.login} onChange={this.handleChange} />
-          {submitted && !login && <div className="help-block">Введите логин</div>}
+          {submitted && !login && <div className='help-block'>Введите логин</div>}
         </div>
         <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
           <label htmlFor='pass'>Пароль:</label>
           <input type='password' className='form-control' id='password' name='password' value={this.state.password} onChange={this.handleChange} />
-          {submitted && !password && <div className="help-block">Введите пароль</div>}
+          {submitted && !password && <div className='help-block'>Введите пароль</div>}
         </div>
         <button className='btn btn-default' onClick={this.onBtnClick}>Войти</button>
       </form>
@@ -82,7 +82,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    login: bindActionCreators(login, dispatch),
+    loginUser: bindActionCreators(loginUser, dispatch),
     errorAlert: bindActionCreators(errorAlert, dispatch),
     clearAlert: bindActionCreators(clearAlert, dispatch),
   };

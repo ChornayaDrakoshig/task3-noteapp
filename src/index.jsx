@@ -6,7 +6,6 @@ import { HashRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from 'sourceDir/App.jsx';
-//import noteReducer from 'sourceRedux/noteReducer.js';
 import reducer from 'sourceRedux/rootReducer.js'
 import { addNote } from 'sourceRedux/noteActions.js';
 
@@ -28,14 +27,6 @@ xhr.onreadystatechange = function () {
     }
   }
 };
-/*
-ReactDOM.render(
-  <Provider store={store}>
-    <NotesPage />
-  </Provider>,
-  document.getElementById('root'),
-);
-*/
 ReactDOM.render(
   <HashRouter>
     <Provider store={store}>

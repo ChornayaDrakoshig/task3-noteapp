@@ -81,6 +81,24 @@ const s = http.createServer(function(request, response) {
           response.write(answerString);
           response.end();
         });
+      } else if (formInfo.form === 'signupform') {
+        User.findOne({ username: formInfo.login }, 'username', function (err, user) {
+          answer.prom = -1;
+          let answerString = '';
+          if (!err) {
+            if (user === null) {
+              var newUser = UserSchema.methods.createUser({ login: formInfo.login, password: formInfo.password, email: formInfo.email});
+              answer.prom = 0;
+              answer.username = formInfo.login;
+              answer.email = formInfo.email;    
+            } else {
+              answer.prom = 1;
+            }
+            answerString = JSON.stringify(answer);
+          }
+          response.write(answerString);
+          response.end();
+        });  
       }
     } else {
       const notes = [];

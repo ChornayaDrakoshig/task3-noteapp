@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { clearAlert } from 'sourceRedux/alertActions.js';
-import { logout } from 'sourceRedux/userActions.js';
+import { logoutUser } from 'sourceRedux/userActions.js';
 
 class UserInfo extends Component {
   constructor(props) {
@@ -27,6 +28,12 @@ class UserInfo extends Component {
     );
   }
 }
+UserInfo.propTypes = {
+  username: PropTypes.string,
+  email: PropTypes.string,
+  clearAlert: PropTypes.func,
+  logout: PropTypes.func,
+};
 function mapStateToProps(state) {
   return {
     username: ('username' in state.user) ? state.user.username : 'Anonymous',
@@ -35,8 +42,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    logout: bindActionCreators(logout, dispatch),
+    logout: bindActionCreators(logoutUser, dispatch),
     clearAlert: bindActionCreators(clearAlert, dispatch),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+

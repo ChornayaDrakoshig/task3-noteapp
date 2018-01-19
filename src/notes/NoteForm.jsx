@@ -13,8 +13,7 @@ class NoteForm extends React.Component {
         notebody: this.props.editedbody,
       },
     };
-    this.handleChangeHeader = this.handleChangeHeader.bind(this);
-    this.handleChangeText = this.handleChangeText.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
   }
 
@@ -36,24 +35,23 @@ class NoteForm extends React.Component {
     if (this.props.edited < 0) this.props.addNote(head, body);
     else this.props.saveNote(head, body, this.props.edited);
   }
-  handleChangeHeader(event) {
-    const editednote = this.state.note;
-    editednote.noteheader = event.target.value;
-    this.setState({ note: editednote });
-  }
-  handleChangeText(event) {
-    const editednote = this.state.note;
-    editednote.notebody = event.target.value;
-    this.setState({ note: editednote });
+  handleChange(e) {
+    const { name, value } = e.target;
+    const newState = {
+      noteheader: this.state.note.noteheader,
+      notebody: this.state.note.notebody,
+    };
+    newState[name] = value;
+    this.setState({ note: newState });
   }
   render() {
     return (
       <form id='noteform'>
         <div className='form-group'>
-          <input type='text' className='form-control' id='notehead-form' value={this.state.note.noteheader} onChange={this.handleChangeHeader} />
+          <input type='text' className='form-control' name='noteheader' id='notehead-form' value={this.state.note.noteheader} onChange={this.handleChange} />
         </div>
         <div className='form-group'>
-          <textarea className='form-control' rows='5' id='notebody-form' value={this.state.note.notebody} onChange={this.handleChangeText} />
+          <textarea className='form-control' rows='5' name='notebody' id='notebody-form' value={this.state.note.notebody} onChange={this.handleChange} />
         </div>
         <button className='btn btn-default' onClick={this.onBtnClick}>{(this.props.edited < 0) ? 'Добавить' : 'Сохранить'}</button>
       </form>);
