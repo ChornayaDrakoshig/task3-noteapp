@@ -1,4 +1,7 @@
 import { userConstants } from './userConstants.js';
+import { successAlert, errorAlert, clearAlert } from 'sourceRedux/modules/alert/alertActions.js';
+
+const superagent = require('superagent');
 
 export const loginUser = (userInfo) => ({
   type: userConstants.LOGIN,
@@ -9,3 +12,46 @@ export const loginUser = (userInfo) => ({
 export const logoutUser = () => ({
   type: userConstants.LOGOUT,
 });
+
+export const loginRequest = (user) => ({
+  type: userConstants.LOGIN_REQUEST, 
+  username: user,
+});  
+
+export const loginSuccess = (userInfo) => ({
+  type: userConstants.LOGIN_SUCCESS,
+  username: userInfo.username,
+  email: userInfo.email,
+});
+
+export const loginFailure = () => ({
+  type: userConstants.LOGIN_FAILURE,
+});
+
+export const authUser = (userInfo) => {
+  return dispatch => {
+    dispatch(loginRequest({ user: userInfo.username }));
+    superagent
+    .post('http://localhost:8079/')
+    .set('Accept', 'application/json')
+    .send({ form: 'loginform', login: userInfo.login, password: userInfo.password })
+    .end((err, res) => {
+      if (err) {
+        dispatch(loginFailure());
+        dispatch(errorAlert('Ошибка на сервере'));
+      } else {
+        const answer = JSON.parse(res.text);
+        if (answer.prom === 0) {
+          dispatch(loginSuccess(answer));
+          dispatch(successAlert('Вы вошли в систему'));
+        } else if (answer.prom === 1) {
+          dispatch(errorAlert('Пользователь с таким логином не найден'));
+          dispatch(loginFailure());
+        } else if (answer.prom === 2) {
+          dispatch(errorAlert('Неверный пароль'));
+          dispatch(loginFailure());
+        }       
+      }
+    });
+  }
+}

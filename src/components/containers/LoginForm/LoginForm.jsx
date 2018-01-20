@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const superagent = require('superagent');
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -17,38 +19,7 @@ class LoginForm extends Component {
     event.preventDefault();
     this.setState({ submitted: true });
     if (this.state.login && this.state.password) {
-      const xhr = new XMLHttpRequest();
-      let str = '';
-      let answer = {};
-      const fnLogin = this.props.loginUser;
-      const fnError = this.props.errorAlert;
-      const fnClear = this.props.clearAlert;
-      const fnSuccess = this.props.successAlert;
-      const json = JSON.stringify({
-        form: 'loginform',
-        login: this.state.login,
-        password: this.state.password,
-      });
-      xhr.open('POST', 'http://localhost:8079/', true);
-      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-      xhr.send(json);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState !== 4) return;
-        if (xhr.status === 200) {
-          str = xhr.responseText;
-          if (str !== '') {
-            answer = JSON.parse(str);
-            if (answer.prom === 0) {
-              fnLogin(answer);
-              fnSuccess('Вы вошли в систему');
-            } else if (answer.prom === 1) {
-              fnError('Пользователь с таким логином не найден');
-            } else if (answer.prom === 2) {
-              fnError('Неверный пароль');
-            }
-          }
-        }
-      };
+      this.props.authUser({ login: this.state.login, password: this.state.password });
     }
   }
   handleChange(e) {

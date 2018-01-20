@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { errorAlert, clearAlert, successAlert } from 'sourceRedux/modules/alert/alertActions.js';
-import { loginUser, logoutUser} from 'sourceRedux/modules/user/userActions.js';
+import { loginUser, logoutUser, authUser } from 'sourceRedux/modules/user/userActions.js';
 import LoginForm from './LoginForm.jsx';
 
 function mapStateToProps(state) {
@@ -15,6 +15,7 @@ function mapDispatchToProps(dispatch) {
   return {
     loginUser: bindActionCreators(loginUser, dispatch),
     logoutUser: bindActionCreators(logoutUser, dispatch),
+    authUser: bindActionCreators(authUser, dispatch),
     successAlert: bindActionCreators(successAlert,dispatch),
     errorAlert: bindActionCreators(errorAlert, dispatch),
     clearAlert: bindActionCreators(clearAlert, dispatch),
