@@ -4,4 +4,5 @@ export const noteConstants = {
   DELETE: 'DELETE_NOTE',
   VIEW: 'VIEW_NOTE',
   EDIT: 'EDIT_NOTE',
+  WAITING: 'WAITING_FOR_SERVER_RESPONSE',
 };

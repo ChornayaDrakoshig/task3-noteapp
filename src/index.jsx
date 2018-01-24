@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from 'sourceDir/components/pages/App.jsx';
 import reducer from 'sourceRedux/rootReducer.js';
-import {addNote} from 'sourceRedux/modules/note/noteActions.js';
 
 const loggerMiddleware = createLogger();
 
@@ -21,22 +20,6 @@ const store = createStore(
   )
 );
 
-let str = '';
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://localhost:8079/', true);
-xhr.send();
-xhr.onreadystatechange = function () {
-  if (xhr.readyState !== 4) return;
-  if (xhr.status === 200) {
-    str = xhr.responseText;
-    if (str !== '' && str[0] === '[') {
-      const notes = JSON.parse(str);
-      for (let i = 0; i < notes.length; i += 1) {
-        store.dispatch(addNote(notes[i].header, notes[i].body));
-      }
-    }
-  }
-};
 ReactDOM.render(
   <HashRouter>
     <Provider store={store}>

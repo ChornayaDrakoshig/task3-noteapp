@@ -35,6 +35,8 @@ export function notes(state = initialState, action) {
       });
     case noteConstants.EDIT:
       return ({fullnotelist: state.fullnotelist, selected: action.id, edited: action.id});
+    case noteConstants.WAITING:
+      return state;
     default: return newState;
   }
 }

@@ -13,8 +13,15 @@ class SignupForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
+    this.confirmPassword = this.confirmPassword.bind(this);
   }
 
+  confirmPassword() {
+    if (this.state.password !== this.state.passrepeated) {
+      return {isValid: false, msg: 'Пароли не совпадают'};
+    }
+    return {isValid: true};
+  }
   onBtnClick(event) {
     event.preventDefault();
     this.setState({submitted: true});
@@ -34,20 +41,10 @@ class SignupForm extends Component {
     } = this.state;
     return (
       <form id="signupform">
-        <Input id="login" type="text" title="Логин" value={login} onFieldChange={this.handleChange} submitted={submitted} helperOnEmpty="Введите логин" />
-        <Input id="password" type="password" title="Пароль" value={password} onFieldChange={this.handleChange} submitted={submitted} helperOnEmpty="Введите пароль" />
-        <Input
-          id="passrepeated"
-          type="password"
-          title="Повторите пароль"
-          value={passrepeated}
-          onFieldChange={this.handleChange}
-          submitted={submitted}
-          helperOnEmpty="Введите подтверждение пароля"
-          helperOnUnvalid="Пароли не совпадают"
-          fieldToCompare={this.state.password}
-        />
-        <Input id="email" type="text" title="E-mail" value={email} onFieldChange={this.handleChange} submitted={submitted} helperOnEmpty="Введите E-mail" />
+        <Input id="login" type="text" title="Логин" value={login} onFieldChange={this.handleChange} submitted={submitted} isRequired />
+        <Input id="password" type="password" title="Пароль" value={password} onFieldChange={this.handleChange} submitted={submitted} isRequired />
+        <Input id="passrepeated" type="password" title="Повторите пароль" value={passrepeated} onFieldChange={this.handleChange} submitted={submitted} isRequired onFieldValidation={this.confirmPassword} />
+        <Input id="email" type="text" title="E-mail" value={email} onFieldChange={this.handleChange} submitted={submitted} isRequired />
         <button className="btn btn-default" onClick={this.onBtnClick}>Зарегистрироваться</button>
       </form>
     );

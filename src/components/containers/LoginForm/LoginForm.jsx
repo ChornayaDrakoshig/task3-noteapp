@@ -29,8 +29,8 @@ class LoginForm extends Component {
     return (
       <div>
         <form id="loginform" name="loginform">
-          <Input id="login" type="text" title="Логин" value={login} onFieldChange={this.handleChange} submitted={submitted} helperOnEmpty="Введите логин" />
-          <Input id="password" type="password" title="Пароль" value={password} onFieldChange={this.handleChange} submitted={submitted} helperOnEmpty="Введите пароль" />
+          <Input id="login" type="text" title="Логин" value={login} onFieldChange={this.handleChange} submitted={submitted} isRequired />
+          <Input id="password" type="password" title="Пароль" value={password} onFieldChange={this.handleChange} submitted={submitted} isRequired />
           <button className="btn btn-default" onClick={this.onBtnClick}>Войти</button>
         </form>
       </div>

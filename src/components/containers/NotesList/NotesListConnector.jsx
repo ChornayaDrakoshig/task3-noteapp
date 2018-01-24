@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {deleteNote, viewNote, editNote} from 'sourceRedux/modules/note/noteActions.js';
+import {deleteNote, viewNote, editNote, getFromServer} from 'sourceRedux/modules/note/noteActions.js';
 import NotesList from './NotesList.jsx';
 
 function mapStateToProps(state) {
@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch) {
     viewNote: bindActionCreators(viewNote, dispatch),
     deleteNote: bindActionCreators(deleteNote, dispatch),
     editNote: bindActionCreators(editNote, dispatch),
+    getFromServer: bindActionCreators(getFromServer, dispatch),
   };
 }
 
