@@ -1,27 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { HashRouter } from 'react-router-dom';
+import thunkMiddleware from 'redux-thunk';
+import {createLogger} from 'redux-logger';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import {HashRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from 'sourceDir/components/pages/App.jsx';
-import reducer from 'sourceRedux/rootReducer.js'
-import { addNote } from 'sourceRedux/modules/note/noteActions.js';
+import reducer from 'sourceRedux/rootReducer.js';
+import {addNote} from 'sourceRedux/modules/note/noteActions.js';
 
-const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger();
 
 const store = createStore(
   reducer,
   applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
-    loggerMiddleware // neat middleware that logs actions
+    thunkMiddleware,
+    loggerMiddleware
   )
-)
-
-//const store = createStore(reducer);
+);
 
 let str = '';
 const xhr = new XMLHttpRequest();
@@ -33,7 +31,7 @@ xhr.onreadystatechange = function () {
     str = xhr.responseText;
     if (str !== '' && str[0] === '[') {
       const notes = JSON.parse(str);
-      for (let i = 0; i < notes.length; i++) {
+      for (let i = 0; i < notes.length; i += 1) {
         store.dispatch(addNote(notes[i].header, notes[i].body));
       }
     }

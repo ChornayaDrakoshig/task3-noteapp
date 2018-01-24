@@ -27,29 +27,29 @@ class NoteForm extends React.Component {
     event.preventDefault();
     const head = this.state.note.noteheader;
     const body = this.state.note.notebody;
-    this.setState({ note: { noteheader: '', notebody: '' } });
+    this.setState({note: {noteheader: '', notebody: ''}});
     if (this.props.edited < 0) this.props.addNote(head, body);
     else this.props.saveNote(head, body, this.props.edited);
   }
   handleChange(e) {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     const newState = {
       noteheader: this.state.note.noteheader,
       notebody: this.state.note.notebody,
     };
     newState[name] = value;
-    this.setState({ note: newState });
+    this.setState({note: newState});
   }
   render() {
     return (
-      <form id='noteform'>
-        <div className='form-group'>
-          <input type='text' className='form-control' name='noteheader' id='notehead-form' value={this.state.note.noteheader} onChange={this.handleChange} />
+      <form id="noteform">
+        <div className="form-group">
+          <input type="text" className="form-control" name="noteheader" id="notehead-form" value={this.state.note.noteheader} onChange={this.handleChange} />
         </div>
-        <div className='form-group'>
-          <textarea className='form-control' rows='5' name='notebody' id='notebody-form' value={this.state.note.notebody} onChange={this.handleChange} />
+        <div className="form-group">
+          <textarea className="form-control" rows="5" name="notebody" id="notebody-form" value={this.state.note.notebody} onChange={this.handleChange} />
         </div>
-        <button className='btn btn-default' onClick={this.onBtnClick}>{(this.props.edited < 0) ? 'Добавить' : 'Сохранить'}</button>
+        <button className="btn btn-default" onClick={this.onBtnClick}>{(this.props.edited < 0) ? 'Добавить' : 'Сохранить'}</button>
       </form>);
   }
 }

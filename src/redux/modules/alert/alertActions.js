@@ -1,4 +1,4 @@
-import { alertConstants } from './alertConstants.js';
+import {alertConstants} from './alertConstants.js';
 
 export const successAlert = (message) => ({
   type: alertConstants.SUCCESS,

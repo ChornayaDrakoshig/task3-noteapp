@@ -1,4 +1,4 @@
-import { noteConstants } from './noteConstants.js';
+import {noteConstants} from './noteConstants.js';
 
 export const addNote = (head, body) => ({
   type: noteConstants.ADD,

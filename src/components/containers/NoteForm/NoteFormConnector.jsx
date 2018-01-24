@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { addNote, saveNote } from 'sourceRedux/modules/note/noteActions.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {addNote, saveNote} from 'sourceRedux/modules/note/noteActions.js';
 import NoteForm from './NoteForm.jsx';
 
 function mapStateToProps(state) {

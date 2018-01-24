@@ -1,5 +1,4 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
 import Header from './Header.jsx';
 
 function mapStateToProps(state) {
